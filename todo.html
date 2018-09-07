@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>VUE-TODO</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <style>
         .del{
@@ -27,12 +27,12 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-warning">
                         <div class="panel-heading ">
-                            <h3 class="text-danger">亲~，^_^你由{{count}}件事要完成</h3>
+                            <h3 class="text-danger">亲~，^_^你有{{count}}件事要完成</h3>
                             <input type="text" class="form-control" v-model="title" @keyup.13='add'>
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
-                                <li class="list-group-item" v-for="(todo, index) in todos" @dblclick="remember(todo)">
+                                <li class="list-group-item" v-for="(todo, index) in filterTodos" @dblclick="remember(todo)">
                                     <span :class="{del:todo.isSelected}" v-show="cur != todo" >
                                         <input type="checkbox" v-model="todo.isSelected"> {{todo.title}}
                                     </span>
@@ -43,9 +43,9 @@
                         </div>
                         <div class="panel-footer">
                             <ul class="nav nav-pills">
-                                <li role="presentation" class="active"><a href="#">全部任务</a></li>
-                                <li role="presentation" ><a href="#">已完成</a></li>
-                                <li role="presentation" ><a href="#">未完成</a></li>
+                                <li role="presentation" :class="{active: hash === 'all'}"><a href="#/all">全部任务</a></li>
+                                <li role="presentation" :class="{active: hash === 'finish'}"><a href="#/finish">已完成</a></li>
+                                <li role="presentation" :class="{active: hash === 'unfinish'}"><a href="#/unfinish">未完成</a></li>
                             </ul>
                         </div>
                     </div>
